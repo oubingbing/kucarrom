@@ -1,0 +1,117 @@
+<include file="Public/headerFooter"/>
+<div class="mui-content">
+	<div id="slider" class="mui-slider mui-fullscreen" > 
+		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			<a class="mui-control-item" href="#item1mobile" >签到</a>
+			<a class="mui-control-item" href="#item2mobile">签到明细</a>
+		</div>
+		<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6" ></div>
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view mui-grid-view mui-grid-9">
+							<!--签到-->
+							<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 qiandaodiv">
+								<a>
+									<span class="spancolor mui-icon iconfont icon-qiandao"></span>
+									<div class="mui-media-body">签到</div>
+								</a>
+							</li>
+							<!--签到情况-->
+							<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" style="border-left:solid 1px gray;">
+								<a>
+									<span>小明 中班 已签</span><br>
+									<span>小明 中班 未签</span><br>
+									<span>小明 中班 未签</span><br>
+									<span>小明 中班 未签</span><br>
+									<span>小明 晚班 未签</span>
+								</a>
+							</li>
+						</ul> 
+
+						<!--排班表-->
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<div class="mui-media-body">
+										波波
+										<p class='mui-ellipsis'>星期几 中班</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/muwu.jpg">
+									<div class="mui-media-body">
+										俊杰
+										<p class='mui-ellipsis'>星期几 晚班</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/cbd.jpg">
+									<div class="mui-media-body">
+										达达
+										<p class='mui-ellipsis'>星期几 晚班</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<div class="mui-media-body">
+										波波
+										<p class='mui-ellipsis'>星期几 中班</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/muwu.jpg">
+									<div class="mui-media-body">
+										俊杰
+										<p class='mui-ellipsis'>星期几 晚班</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../images/cbd.jpg">
+									<div class="mui-media-body">
+										达达
+										<p class='mui-ellipsis'>星期几 晚班</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--签到详情-->
+			<div id="item2mobile" class="mui-slider-item mui-control-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">Item 1</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">Item 2</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">Item 3</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	mui.init();
+</script>
+</html>
