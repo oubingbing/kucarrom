@@ -46,4 +46,9 @@ class MainController extends PublicController {
 		$this->assign('list',$list);
 		$this->display();
 	}
+
+	//签到操作
+	public function do_qiandao(){
+		$this->success(I('post.id'));
+	}
 }

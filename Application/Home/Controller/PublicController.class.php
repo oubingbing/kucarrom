@@ -8,6 +8,20 @@ class PublicController extends Controller {
 			echo "请使用手机访问，谢谢";
 			exit();
 		}
+		$user=session('username');
+		if($user==''){
+			$pwd=cookie('psw');
+			$username=cookie('username');
+			if($username!=''&&$pwd!=''){
+				$data['username']=$username;
+				$pass=M('Myuser')->where($data)->getField('password');
+				if(md5($pass)==md5($pwd)){
+					//自动登录
+					session('username',$username);
+					$this->redirect('Main/index');
+				}
+			}
+		}
 	}
 
 	//判断是否是手机访问

@@ -33,14 +33,15 @@
           <nav class="tm-nav">
             <ul>
               <li><a href="__URL__/main" class="active">首页</a></li>
-              <if condition="$status eq 1 ">
-               <li><a href="__APP__/home/personal/index" ><if condition="$vip eq 1 "><img src="__PUBLIC__/img/Vip.png" style="width:30px"></if>{$login}</a></li>
+              <if condition="$Think.session.username eq null">
+                <li><a href="{:U('Index/login')}"><small style="font-size:9px">未登录,点击登录</small></a></li>
                <else />
-               <li><a href="{:U('Index/login')}"><small style="font-size:9px">未登录,点击登录</small></a></li>
+               <li><a href="{:U('Main/index')}">{$Think.session.username}</a></li>
              </if>
              <li><a href="__APP__/home/Login/register">注册</a></li>
-             <li><if condition="$power egt 1 "><a href="__APP__/admine" >后台</a></if></li>
-             <if condition="$status eq 1 "> <li><a href="__APP__/home/Login/quit" >退出</a></li>
+              <if condition="$Think.session.username neq null">
+                <li><a href="{:U('Index/quit')}">退出</a></li>
+               <else />
              </if>
            </ul>
          </nav>   
