@@ -32,7 +32,7 @@
           </div>
           <nav class="tm-nav">
             <ul>
-              <li><a href="/kucaroomGit/kucarrom/index.php/Home/Index/main" class="active">首页</a></li>
+              <li><a href="/kucaroomGit/kucarrom/index.php/home/index/main" class="active">首页</a></li>
               <?php if($status == 1 ): ?><li><a href="/kucaroomGit/kucarrom/index.php/home/personal/index" ><?php if($vip == 1 ): ?><img src="/kucaroomGit/kucarrom/Public/img/Vip.png" style="width:30px"><?php endif; echo ($login); ?></a></li>
                <?php else: ?>
                <li><a href="<?php echo U('Index/login');?>"><small style="font-size:9px">未登录,点击登录</small></a></li><?php endif; ?>
@@ -110,9 +110,9 @@
         <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
           <h3 class="tm-footer-div-title">古卡</h3>
           <ul>
-            <li><a href="/kucaroomGit/kucarrom/index.php/Home/Index/aboutus">关于我们</a></li>
-            <li><a href="/kucaroomGit/kucarrom/index.php/Home/Index/culture">古卡文化</a></li>
-            <li><a href="/kucaroomGit/kucarrom/index.php/Home/Index/team">古卡团队</a></li>
+            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/aboutus">关于我们</a></li>
+            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/culture">古卡文化</a></li>
+            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/team">古卡团队</a></li>
           </ul>
         </nav>
 
