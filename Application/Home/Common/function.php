@@ -23,4 +23,24 @@
 
 	}
 
+	//检验登录信息
+	function checkLoginInfo($username){
+		$m=M("Myuser");
+		$data['username']=$username;
+		$data['password']=md5($password);
+		$num=$m->where($data)->count();
+	        if($num>0){//判断验证码是否正确
+	        	return true;
+	        }
+	        else{
+	        	$this->error("用户名或密码错误");
+	        	exit();
+	        }
+	    }
+
+	//检验验证码
+	function checkCode($code){
+	    $verify = new \Think\Verify();
+	    return $verify->check($code);
+	}
 ?>

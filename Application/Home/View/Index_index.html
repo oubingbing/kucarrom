@@ -32,13 +32,13 @@
           </div>
           <nav class="tm-nav">
             <ul>
-              <li><a href="__URL__/main" class="active">首页</a></li>
+              <li><a href="{:U('Index/index')}" class="active">首页</a></li>
               <if condition="$Think.session.username eq null">
                 <li><a href="{:U('Index/login')}"><small style="font-size:9px">未登录,点击登录</small></a></li>
+                <li><a href="{:U('Index/register')}">注册</a></li>
                <else />
                <li><a href="{:U('Main/index')}">{$Think.session.username}</a></li>
              </if>
-             <li><a href="__APP__/home/Login/register">注册</a></li>
               <if condition="$Think.session.username neq null">
                 <li><a href="{:U('Index/quit')}">退出</a></li>
                <else />

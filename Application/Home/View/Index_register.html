@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>登录</title>
+    <title>注册</title>
     <link href="__PUBLIC__/css/mui.min.css" rel="stylesheet" />
     <link href="__PUBLIC__/css/style.css" rel="stylesheet" />
     <style>
@@ -109,17 +109,25 @@
   <body>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="{:U('Index/index')}"></a>
-      <h1 class="mui-title">欢迎登陆</h1>
+      <h1 class="mui-title">欢迎注册</h1>
     </header>
     <div class="mui-content">
-      <form id='login_form' class="mui-input-group" method="post" action="{:U('Index/index')}">
+      <form id='reg_form' class="mui-input-group" method="post" action="{:U('Index/register')}">
         <div class="mui-input-row">
           <label>账号</label>
           <input id='account' name="username" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入账号">
         </div>
         <div class="mui-input-row">
           <label>密码</label>
-          <input id='password' name="password" type="password" class="mui-input-clear mui-input inputFont" placeholder="请输入密码">
+          <input name="password" type="password" class="mui-input-clear mui-input inputFont" placeholder="请输入密码">
+        </div>
+        <div class="mui-input-row">
+          <label>确认</label>
+          <input name="confirm_password" type="password" class="mui-input-clear mui-input inputFont" placeholder="请输入确认密码">
+        </div>
+        <div class="mui-input-row">
+          <label>邮箱</label>
+          <input name="email" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入邮箱">
         </div>
         <div class="mui-input-row" id="codeDiv" style="margin:8px auto">
         <input id='code' name="code" type="text" class="mui-input-clear mui-input code inputFont" placeholder="请输入验证码">
@@ -130,7 +138,7 @@
         </div>
       </form>
       <div class="mui-content-padded">
-        <div class="link-area"><a id="reg_dump" style="color:rgba(96,56,17,1)" href="{:U('Index/register')}">注册账号</a> <span class="spliter fontColor">|</span> <a id='forgetPassword' style="color:rgba(96,56,17,1)">忘记密码</a>
+        <div class="link-area"><a id='reg' style="color:rgba(96,56,17,1)">注册账号</a> <span class="spliter fontColor">|</span> <a id='forgetPassword' style="color:rgba(96,56,17,1)">忘记密码</a>
         </div>
       </div>
     </div>
@@ -138,8 +146,8 @@
     <script src="__PUBLIC__/js/mui.min.js"></script>
     <script>
       $(document).ready(function(){
-        //登录
-        $("#login_form").submit(function(e){
+        //
+        $("#reg_form").submit(function(e){
           var self = $(this);
           $.post(self.attr("action"), self.serialize(), success, "json");
           return false;
@@ -147,7 +155,7 @@
             if(ajaxdata.status==1){
               alert(ajaxdata.info);
               //跳转到用户页面
-              window.location.href="{:U('Main/index')}";
+              window.location.href="{:U('Index/login')}";
             }else{
               mui.toast(ajaxdata.info);
               //自动更新验证码
@@ -155,7 +163,7 @@
               $("#imgcode").attr("src",imgattr+'?'+Math.random);
             }
           }
-        });
+        })
       });
     </script>
   </body>

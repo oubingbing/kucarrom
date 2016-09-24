@@ -202,7 +202,7 @@ ul {
   text-decoration: none;
 }
 .tm-nav li a.active {
-  background: url(__PUBLIC__/img/logo.png) no-repeat, url(../img/nav-underline.png) no-repeat;
+  background: url('../img/logo.png') no-repeat, url(../img/nav-underline.png) no-repeat;
   background-size: 20px, 74px 17px;
   background-position: 0% 30%, center bottom;
 }
@@ -299,7 +299,7 @@ ul {
 .img-thumbnail { padding: 8px; }
 .inline-block { display: inline-block; }
 .shadow-img {
-  background: url(__PUBLIC__/img/shadow.png) no-repeat center bottom;
+  background: url('../img/shadow.png') no-repeat center bottom;
   padding-bottom: 7px;
 }
 .margin-top-30 { margin-top: 30px; }

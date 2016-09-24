@@ -4,12 +4,15 @@ use Think\Controller;
 class PublicController extends Controller {
 	protected function _initialize() {
 		header("Content-Type:text/html; charset=utf-8");
-		if (!$this->is_mobile()) { 
-			echo "请使用手机访问，谢谢";
-			exit();
-		}
-		$user=session('username');
-		if($user==''){
+		// if (!$this->is_mobile()) { 
+		// 	echo "请使用手机访问，谢谢";
+		// 	exit();
+		// }
+		$s=session('username');
+		$c=cookie('username');
+		// echo "s".$s.'c'.$c;
+		// exit();
+		if($s==''&&$c!=''){
 			$pwd=cookie('psw');
 			$username=cookie('username');
 			if($username!=''&&$pwd!=''){
@@ -60,10 +63,10 @@ class PublicController extends Controller {
             'fontSize'    =>    15,    // 验证码字体大小
             'length'      =>    3,     // 验证码位数
             'useNoise'    =>    false, // 关闭验证码杂点
-
             );
 		$Verify = new \Think\Verify($config);
 		$Verify->codeSet = '0123456789';
 		$Verify->entry();
 	}
+
 }
