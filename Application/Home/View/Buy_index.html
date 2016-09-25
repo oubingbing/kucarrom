@@ -91,9 +91,10 @@
 									<a>
 										<div class="mui-media-body">
 											<label style="color:red;">{$data.name}</label>　<span style="float:right">下单日期:{$data.time|date="Y-m-d H:i",###}</span>
-											<p>数量：<input class="inputChange" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange" type="text" name="num" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
-											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<if condition="$data.buyman eq 'null'"><button type="button" class="mui-btn mui-btn-warning">采购</button><else /><label>采购：</label>{$data.buyman}</if><button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right">删除</butaton></p>
+											<p>数量：<input class="inputChange cf_num_chg" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center" id="{$data.id}">　　<span style="float:right">总金额：<input class="inputChange cf_price_chg" type="text" name="{$data.id}" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
+											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<button name="{$data.id}" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right cf_do_del">删除</button><if condition="$data.buyman eq 'null'"><button type="button" style="float:right;margin-right:20px" id="{$data.id}" class="mui-btn mui-btn-warning cf_do_buy">采购</button>　<else /><label>采购：</label>{$data.buyman}</if></p>
 										</div>
+
 									</a>
 								</li>
 							</foreach>
@@ -105,8 +106,8 @@
 									<a>
 										<div class="mui-media-body">
 											<label style="color:red;">{$data.name}</label>　<span style="float:right">下单日期:{$data.time|date="Y-m-d H:i",###}</span>
-											<p>数量：<input class="inputChange" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange" type="text" name="num" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
-											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<if condition="$data.buyman eq 'null'"><button type="button" class="mui-btn mui-btn-warning">采购</button><else /><label>采购：</label>{$data.buyman}</if><button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right">删除</butaton></p>
+											<p>数量：<input class="inputChange bt_num_chg" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center" id="{$data.id}">　　<span style="float:right">总金额：<input class="inputChange bt_price_chg" type="text" name="{$data.id}" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
+											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<button style="float:right" name="{$data.id}" type="button" class="mui-btn mui-btn-danger mui-pull-right bt_do_del">删除</button><if condition="$data.buyman eq 'null'"><button style="float:right;margin-right:20px" type="button" class="mui-btn mui-btn-warning bt_do_buy" id="{$data.id}">采购</button><else /><label>采购：</label>{$data.buyman}</if></p>
 										</div>
 									</a>
 								</li>
@@ -119,8 +120,8 @@
 									<a>
 										<div class="mui-media-body">
 											<label style="color:red;">{$data.name}</label>　<span style="float:right">下单日期:{$data.time|date="Y-m-d H:i",###}</span>
-											<p>数量：<input class="inputChange" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange" type="text" name="num" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
-											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<if condition="$data.buyman eq 'null'"><button type="button" class="mui-btn mui-btn-warning">采购</button><else /><label>采购：</label>{$data.buyman}</if><button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right">删除</butaton></p>
+											<p>数量：<input class="inputChange ol_num_chg" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center" id="{$data.id}">　　<span style="float:right">总金额：<input class="inputChange ol_price_chg" type="text" name="{$data.id}" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
+											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right ol_do_del" name="{$data.id}">删除</button><if condition="$data.buyman eq 'null'"><button type="button" class="do_buy mui-btn mui-btn-warning ol_do_buy" style="float:right;margin-right:20px" id="{$data.id}">采购</button><else /><label>采购：</label>{$data.buyman}</if></p>
 										</div>
 									</a>
 								</li>
@@ -178,6 +179,7 @@
 	</div>
 </div>
 <script src="__PUBLIC__/js/jquery-1.11.2.min.js"></script>
+<!-- <script src="__PUBLIC__/js/buy.js"></script> -->
 <script>
 	(function($) {
 		$('.mui-scroll-wrapper').scroll({
@@ -187,16 +189,15 @@
 			switch (this.getAttribute('name')) {
 				case 'one':dump_page("{:u('Main/index')}");break;
 				case 'two':dump_page("{:u('Buy/index')}");break;
-				case 'three':dump_page("{:u('Index/index')}");break;
+				case 'three':dump_page("{:u('Admin/finance')}");break;
 				case 'four':dump_page("{:u('Admin/index')}");break;
-				case 'five':dump_page("{:u('Index/index')}");break;
+				case 'five':dump_page("{:u('Main/personal')}");break;
 			}
 		});
 		function dump_page(url){
 			window.location.href=url;
 		}
 	})(mui);
-
 	$(document).ready(function(){
 		//设置页面的高
 		$('.mui-slider-group').height($(document).height()-80);
@@ -220,7 +221,19 @@
 	        return false;
 	        function success(ajaxdata){
 	         	if(ajaxdata.status==1){
-	         		mui.alert(ajaxdata.info);
+	         		mui.alert(ajaxdata.info.tip);
+	         		switch (ajaxdata.info.where) {
+	         			case '1':
+	         			$("#cf").prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><label style="color:red;">'+ajaxdata.info.name+'</label>　<span style="float:right">下单日期:刚刚</span><p>数量：<input class="inputChange cf_num_chg" id="'+ajaxdata.info.id+'" type="text" name="num" value="'+ajaxdata.info.num+'" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange cf_price_chg" type="text" name="'+ajaxdata.info.id+'" value="'+ajaxdata.info.price+'" style="width:80px;height:30px;text-align:center;"></span></p><p class="mui-ellipsis"><label>下单：</label>'+ajaxdata.info.username+'　<button name="'+ajaxdata.info.id+'" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right cf_do_del">删除</button><button type="button" class="mui-btn mui-btn-warning cf_do_buy" style="float:right;margin-right:20px" id="'+ajaxdata.info.id+'">采购</button></p></div></a></li>');
+	         			break;
+	         			case '2':
+	         			$("#bt").prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><label style="color:red;">'+ajaxdata.info.name+'</label>　<span style="float:right">下单日期:刚刚</span><p>数量：<input class="inputChange bt_num_chg" type="text" id="'+ajaxdata.info.id+'" name="num" value="'+ajaxdata.info.num+'" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange bt_price_chg" type="text" name="'+ajaxdata.info.id+'" value="'+ajaxdata.info.price+'" style="width:80px;height:30px;text-align:center;"></span></p><p class="mui-ellipsis"><label>下单：</label>'+ajaxdata.info.username+'　<button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right bt_do_del" name="'+ajaxdata.info.id+'">删除</button><button type="button" class="mui-btn mui-btn-warning bt_do_buy" style="float:right;margin-right:20px" id="'+ajaxdata.info.id+'">采购</button></p></div></a></li>');
+	         			break;
+	         			case '3':
+	         			$("#ol").prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><label style="color:red;">'+ajaxdata.info.name+'</label>　<span style="float:right">下单日期:刚刚</span><p>数量：<input class="inputChange ol_num_chg" type="text" id="'+ajaxdata.info.id+'" name="num" value="'+ajaxdata.info.num+'" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange ol_price_chg" type="text" name="'+ajaxdata.info.id+'" value="'+ajaxdata.info.price+'" style="width:80px;height:30px;text-align:center;"></span></p><p class="mui-ellipsis"><label>下单：</label>'+ajaxdata.info.username+'　<button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right ol_do_del" name="'+ajaxdata.info.id+'">删除</button><button type="button" class="mui-btn mui-btn-warning ol_do_buy" style="float:right;margin-right:20px" id="'+ajaxdata.info.id+'">采购</button></p></div></a></li>');
+	         			break;
+	         		}
+
 		        }else{
 		          	mui.toast(ajaxdata.info);
 		        }
@@ -252,7 +265,305 @@
 			}
 		});
 
+		//获取动态产生的元素
+		//厨房采购操作
+        $('#cf').on('click','.cf_do_buy',function(){
+            var id=$(this).attr("id");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/cf_do_buy')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+            			_this.css('display','none');
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //厨房删除操作
+        $('#cf').on('click','.cf_do_del',function(){
+            var id=$(this).attr("name");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/cf_do_del')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+           				_this.parent().parent().parent().parent().remove();
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //吧台采购操作
+        $('#bt').on('click','.bt_do_buy',function(){
+            var id=$(this).attr("id");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/bt_do_buy')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+            			_this.css('display','none');
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //厨房删除操作
+        $('#bt').on('click','.bt_do_del',function(){
+            var id=$(this).attr("name");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/bt_do_del')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+           				_this.parent().parent().parent().parent().remove();
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //网购采购操作
+        $('#ol').on('click','.ol_do_buy',function(){
+            var id=$(this).attr("id");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/ol_do_buy')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+            			_this.css('display','none');
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //网购删除操作
+        $('#ol').on('click','.ol_do_del',function(){
+            var id=$(this).attr("name");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Buy/ol_do_del')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+           				_this.parent().parent().parent().parent().remove();
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
+
+        //厨房数量更新
+		$('#cf').on('mouseleave','.cf_num_chg',function(){
+			var id=$(this).attr("id");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/cf_changeNum')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
+		//厨房价格更新
+		$('#cf').on('mouseleave','.cf_price_chg',function(){
+			var id=$(this).attr("name");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/cf_changePrice')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
+		//吧台数量更新
+		$('#bt').on('mouseleave','.bt_num_chg',function(){
+			var id=$(this).attr("id");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/bt_changeNum')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
+		//吧台价格更新
+		$('#bt').on('mouseleave','.bt_price_chg',function(){
+			var id=$(this).attr("name");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/bt_changePrice')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
+		//网购数量更新
+		$('#ol').on('mouseleave','.ol_num_chg',function(){
+			var id=$(this).attr("id");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/ol_changeNum')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
+		//网购价格更新
+		$('#ol').on('mouseleave','.ol_price_chg',function(){
+			var id=$(this).attr("name");
+			var val=$(this).val();
+           	var _this=$(this);
+           	$.ajax({
+           		url: "{:U('Buy/ol_changePrice')}",
+           		dataType: "json",
+           		async: true,
+           		data: {id:id,value:val},
+           		type: "POST",
+           		success: function(ajaxdata) {
+           			if(ajaxdata.status==1){
+           				mui.toast(ajaxdata.info);
+           				_this.val(val);
+           			}else{
+           				mui.toast(ajaxdata.info);
+           			}
+           		},
+           		error: function() {
+           			alert('网络出错');
+           		}
+           	});
+		});
+
 	});
+
+
+
 </script>
 </body>
 </html>

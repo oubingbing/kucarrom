@@ -82,7 +82,7 @@
 									<a>
 										<div class="mui-media-body">
 											<p class='mui-ellipsis'>
-												{$data.username}　月份:{$data.month}　时长:{$data.time}　工资:{$data.salary}
+												{$data.username}　时长:{$data.time}　工资:{$data.salary}　时间:{$data.startime|date="Y-m-d H:i",###}
 											</p>
 										</div>
 									</a>
@@ -104,9 +104,9 @@
 			switch (this.getAttribute('name')) {
 				case 'one':dump_page("{:u('Main/index')}");break;
 				case 'two':dump_page("{:u('Buy/index')}");break;
-				case 'three':dump_page("{:u('Index/index')}");break;
+				case 'three':dump_page("{:u('Admin/finance')}");break;
 				case 'four':dump_page("{:u('Admin/index')}");break;
-				case 'five':dump_page("{:u('Index/index')}");break;
+				case 'five':dump_page("{:u('Main/personal')}");break;
 			}
 		});
 		function dump_page(url){
@@ -133,16 +133,18 @@
 				type: "POST",
 				success: function(ajaxdata) {
 					$('#load').hide();
-					mui.toast("ajaxdata.info");
-					none_qiandao.removeClass('icon-qiandao');
-					none_qiandao.addClass('icon-qiandao1');
-					none_qiandao.css('color','#00CD00');
-					successTip.css('color','#00EE00');
-					successTip.text('签到成功');
+					mui.toast(ajaxdata.info);
+					if(ajaxdata.status==1){
+						none_qiandao.removeClass('icon-qiandao');
+						none_qiandao.addClass('icon-qiandao1');
+						none_qiandao.css('color','#00CD00');
+						successTip.css('color','#00EE00');
+						successTip.text('签到成功');
+					}
 			    },
 			    error: function() {
 			    	$('#load').hide();
-			        alert(ajaxdata.info);
+			        alert('网络出错');
 			    }
 			});
 		});

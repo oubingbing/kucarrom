@@ -23,6 +23,57 @@
 
 	}
 
+	//判断当前时间是那个班次
+	function whatTime(){
+		$t=strtotime(date('H:i'));
+		if($t>strtotime('11:00')&&$t<strtotime('13:00')){
+			return 1;
+		}else{
+			if($t>strtotime('16:30')&$t<strtotime('18:30')){
+				return 2;
+			}else{
+				if($t>strtotime('18:30')&$t<strtotime('22:30')){
+					return 3;
+				}else{
+					return 0;
+				}
+			}
+		}
+	}
+
+	//判断是否已经签到了
+	function had_qiandao($week,$point){
+		$data['username']=session('username');
+		$data['week']=$week;
+		$data['point']=$point;
+		$data['month']=date('y-m');
+		$ret=M('woker')->where($data)->count();
+		if($ret>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	//计算兼职费
+	function count_money($h){
+		$w=date('w');
+		if($w==0||$w==6){
+			return C('Money_weeken')*whatHour($h);
+		}else{
+			return C('Money')*whatHour($h);
+		}
+	}
+
+	//几个工作小时
+	function whatHour($h){
+		switch ($h) {
+			case 1:return 2;break;
+			case 2:return 2;break;
+			case 3:return 4;break;
+		}
+	}
+
 	//检验登录信息
 	function checkLoginInfo($username){
 		$m=M("Myuser");

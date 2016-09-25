@@ -1,0 +1,40 @@
+<include file="Public/headerFooter"/>
+	<style type="text/css">
+		#bg{
+			background-image: url('__PUBLIC__/img/bg.jpg');
+			height: 230px;
+			background-size: 440px;
+		}
+	</style>
+	<div class="mui-content　mui-backdrop" id="bg" style="margin-top:10%">				
+		<p class="yj">
+			<img src="__PUBLIC__/img/touxiang.jpg" data-preview-src="" data-preview-group="1" style="width: 80px;margin: auto;margin-left: 40%;margin-top: 10%; border-radius:50%"/>
+			<div id="myfont" class="whohide" style="text-align:center">
+				<span style="width: 80px;margin: auto; color: greenyellow;" >{$Think.session.username}</span>
+			</div>
+		</p>	
+	</div>
+	<div class="mui-content">
+
+	</div>
+</body>
+<script type="text/javascript">
+		(function($) {
+		$('.mui-scroll-wrapper').scroll({
+			indicators: true 
+		});
+		mui('#nav').on('tap', 'a', function() {
+			switch (this.getAttribute('name')) {
+				case 'one':dump_page("{:u('Main/index')}");break;
+				case 'two':dump_page("{:u('Buy/index')}");break;
+				case 'three':dump_page("{:u('Admin/finance')}");break;
+				case 'four':dump_page("{:u('Admin/index')}");break;
+				case 'five':dump_page("{:u('Main/personal')}");break;
+			}
+		});
+		function dump_page(url){
+			window.location.href=url;
+		}
+	})(mui);
+</script>
+</html>

@@ -9,8 +9,8 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
 	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
-	<link href="__PUBLIC__/css/iconfont.css" rel="stylesheet"/>
 	<link href="__PUBLIC__/css/newiconfont.css" rel="stylesheet"/>
+	<link href="__PUBLIC__/css/iconfont.css" rel="stylesheet"/>
 	<script src="__PUBLIC__/js/mui.min.js"></script>
 </head>
 <body>
@@ -127,23 +127,23 @@
 	</header>
 	<nav class="mui-bar mui-bar-tab" id="nav">
 		<a class="mui-tab-item" name="one">
-			<span class="spancolor mui-icon iconfont icon-jianzhituijian active"></span>
-			<span class="spancolor mui-tab-label active">兼职</span>
+			<span class="spancolor mui-icon iconfont icon-jianzhituijian <php>if($Think.CONTROLLER_NAME==Main&&$Think.ACTION_NAME==index){echo 'active';}</php>"></span>
+			<span class="spancolor mui-tab-label <php>if($Think.CONTROLLER_NAME==Main&&$Think.ACTION_NAME==index){echo 'active';}</php>">兼职</span>
 		</a>
 		<a class="mui-tab-item" name="two">
-			<span class="spancolor mui-icon iconfont icon-caigoujinhuo"></span>
-			<span class="spancolor mui-tab-label">采购</span>		
+			<span class="spancolor mui-icon iconfont icon-caigoujinhuo <php>if($Think.CONTROLLER_NAME==Buy&&$Think.ACTION_NAME==index){echo 'active';}</php>"></span>
+			<span class="spancolor mui-tab-label <php>if($Think.CONTROLLER_NAME==Buy&&$Think.ACTION_NAME==index){echo 'active';}</php>">采购</span>		
 		</a>
 		<a class="mui-tab-item" name="three">
-			<span class="spancolor mui-icon iconfont icon-caiwu" ></span>
-			<span class="spancolor mui-tab-label">财务</span>
+			<span class="spancolor mui-icon iconfont icon-caiwu <php>if($Think.CONTROLLER_NAME==Admin&&$Think.ACTION_NAME==finance){echo 'active';}</php>"></span>
+			<span class="spancolor mui-tab-label <php>if($Think.CONTROLLER_NAME==Admin&&$Think.ACTION_NAME==finance){echo 'active';}</php>">财务</span>
 		</a>
 		<a class="mui-tab-item" name="four">
-			<span class="spancolor mui-icon iconfont icon-houtai8"></span>
-			<span class="spancolor mui-tab-label">管理</span>
+			<span class="spancolor mui-icon iconfont icon-houtai <php>if($Think.CONTROLLER_NAME==Admin&&$Think.ACTION_NAME==index){echo 'active';}</php>"></span>
+			<span class="spancolor mui-tab-label <php>if($Think.CONTROLLER_NAME==Admin&&$Think.ACTION_NAME==index){echo 'active';}</php>">管理</span>
 		</a>
 		<a class="mui-tab-item" name="five">
-			<span class="spancolor mui-icon iconfont icon-geren" ></span>
-			<span class="spancolor mui-tab-label">个人</span>
+			<span class="spancolor mui-icon iconfont icon-geren <php>if($Think.CONTROLLER_NAME==Main&&$Think.ACTION_NAME==personal){echo 'active';}</php>" ></span>
+			<span class="spancolor mui-tab-label <php>if($Think.CONTROLLER_NAME==Main&&$Think.ACTION_NAME==personal){echo 'active';}</php>">个人</span>
 		</a>
 	</nav>
