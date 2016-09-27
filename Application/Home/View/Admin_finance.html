@@ -1,10 +1,10 @@
 <include file="Public/headerFooter"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/mui.picker.min.css" />
 <style type="text/css">
 	.mui-card{
 		margin-top: 20px;
 	}
 </style>
-	
 <div class="mui-content">
 	<div id="slider" class="mui-slider">
 		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -19,56 +19,56 @@
 			</a>
 		</div>
 		<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
-		<div class="mui-slider-group">
+		<div class="mui-slider-group" style="height:550px">
 		<!--录入-->
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-card">
-							<form class="mui-input-group" action="{:U('Buy/add_src')}" method="post" id="post_form">
+							<form class="mui-input-group" action="{:U('Admin/finance')}" method="post" id="post_form">
 								<div class="mui-input-row">
-									<label>时间</label>
-									<input name="name" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入名称">
+									<label style="margin-left:-15px" class="btn" data-options='{"type":"date","beginYear":2014,"endYear":2016}'>选择日期</label>
+									<input name="ym" id="time" type="text" class="mui-input-clear mui-input inputFont" placeholder="请选择日期">
 								</div>
 								<div class="mui-input-row">
 									<label>营业额</label>
-									<input name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
+									<input name="allmoney" type="text" class="mui-input-clear mui-input inputFont" placeholder="营业额">
 								</div>
 								<div class="mui-input-row">
 									<label>支付宝</label>
-									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
+									<input name="alipay" type="text" class="mui-input-clear mui-input inputFont" placeholder="支付宝">
 								</div>
 								<div class="mui-input-row">
 									<label>微信</label>
-									<input name="name" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入名称">
+									<input name="weixinpay" type="text" class="mui-input-clear mui-input inputFont" placeholder="微信">
 								</div>
 								<div class="mui-input-row">
 									<label>现金</label>
-									<input name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
+									<input name="cash" type="text" class="mui-input-clear mui-input inputFont" placeholder="现金">
 								</div>
 								<div class="mui-input-row">
 									<label>订单</label>
-									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
+									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="订单">
 								</div>
 								<div class="mui-input-row">
 									<label>昨日零钱</label>
-									<input name="name" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入名称">
+									<input name="yesterDay" type="text" class="mui-input-clear mui-input inputFont" placeholder="昨日零钱">
 								</div>
 								<div class="mui-input-row">
 									<label>今日应有</label>
-									<input name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
+									<input name="todayYingyou" type="text" class="mui-input-clear mui-input inputFont" placeholder="今日应有">
 								</div>
 								<div class="mui-input-row">
 									<label>今日实有</label>
-									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
+									<input name="todayShiyou" type="text" class="mui-input-clear mui-input inputFont" placeholder="今日实有">
 								</div>
 								<div class="mui-input-row">
 									<label>取走</label>
-									<input name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
+									<input name="takeUp" type="text" class="mui-input-clear mui-input inputFont" placeholder="取走">
 								</div>
 								<div class="mui-input-row">
 									<label>余零</label>
-									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
+									<input name="info" type="text" class="mui-input-clear mui-input inputFont" placeholder="余零">
 								</div>
 								<div class="mui-content-padded">
 									<button type="submit" class="mui-btn mui-btn-block mui-btn-warning" style="margin-top:20px">提交</button>
@@ -83,15 +83,33 @@
 				<p class='mui-ellipsis' style="text-align:center;margin-top:10px">偶买噶，这样都被你看见>_<</p>
 				<div id="scroll2" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-					<!--厨房-->
-						<ul class="mui-table-view" id="cf">
-							<foreach name="chufang" item="data">
+						<ul class="mui-table-view" id="busuness">
+							<foreach name="business" item="data">
 								<li class="mui-table-view-cell mui-media">
 									<a>
 										<div class="mui-media-body">
-											<label style="color:red;">{$data.name}</label>　<span style="float:right">下单日期:{$data.time|date="Y-m-d H:i",###}</span>
-											<p>数量：<input class="inputChange" type="text" name="num" value="{$data.num}" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange" type="text" name="num" value="{$data.price}" style="width:80px;height:30px;text-align:center;"></span></p>
-											<p class='mui-ellipsis'><label>下单：</label>{$data.username}　<if condition="$data.buyman eq 'null'"><button type="button" class="mui-btn mui-btn-warning">采购</button><else /><label>采购：</label>{$data.buyman}</if><button style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right">删除</butaton></p>
+											<label style="color:red;">营业额:{$data.allmoney}</label>
+											<span style="float:right">日期:{$data.ym}</span>
+											<p>
+												<label>订单:{$data.num}</label>
+												<label style="float:right">现金:{$data.cash}</label>
+											</p>
+											<p>
+												<label>支付宝:{$data.alipay}</label>
+												<label style="float:right">微信:{$data.weixinpay}</label>
+											</p>
+											<p>
+												<label>昨日零钱:{$data.yesterday}</label>　　
+												<label style="float:right">余零:{$data.info}</label>
+											</p>
+											<p class='mui-ellipsis'>
+												<label>今日应有:{$data.todayyingyou}</label>
+												<label style="float:right">今日实有:{$data.todayshiyou}</label>
+											</p>
+											<p>
+												<label>取走:{$data.takeup}</label>
+												<button name="{$data.id}" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right busuness_del">删除</button>
+											</p>
 										</div>
 									</a>
 								</li>
@@ -105,7 +123,22 @@
 				<p class='mui-ellipsis' style="text-align:center;margin-top:10px">偶买噶，这样都被你看见>_<</p>
 				<div id="scroll2" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-
+						<ul class="mui-table-view" id="cf">
+							<foreach name="cost" item="data">
+								<li class="mui-table-view-cell mui-media">
+									<a>
+										<div class="mui-media-body">
+											<label style="color:red;">厨房:{$data.chufang}</label>
+											<span style="float:right">日期:{$data.ym}</span>
+											<p>
+												<label>吧台:{$data.batai}</label>
+												<label style="float:right">网购:{$data.online}</label>
+											</p>
+										</div>
+									</a>
+								</li>
+							</foreach>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -114,8 +147,25 @@
 	</div>
 </div>
 <script src="__PUBLIC__/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/js/mui.picker.min.js"></script>
 <script>
 	(function($) {
+		$.init();
+		var result = $('#result')[0];
+		var btns = $('.btn');
+		btns.each(function(i, btn) {
+			btn.addEventListener('tap', function() {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				var picker = new $.DtPicker(options);
+				picker.show(function(rs) {
+					document.getElementById('time').value=rs.text;
+					picker.dispose();1
+				});
+			}, false);
+		});
+
 		$('.mui-scroll-wrapper').scroll({
 			indicators: true 
 		});
@@ -135,33 +185,53 @@
 
 	$(document).ready(function(){
 		//设置页面的高
-		$('.mui-slider-group').height($(document).height()-80);
+		// $('.mui-slider-group').height($(document).height()-80);
 		//签到操作
 		$("#post_form").submit(function(e){
-	        //简单的前端判断
-	        if($('input[name="name"]').val()==''){
-	        	mui.toast("原料名称不能为空");
-	        	return false;
-	        }
-	        if($('input[name="price"]').val()==''){
-	        	mui.toast("原料价格不能为空");
-	        	return false;
-	        }
-	        if($('input[name="num"]').val()==''){
-	        	mui.toast("原料数量不能为空");
-	        	return false;
-	        }
+			var result = confirm('你确定要提交吗？');
+			if(!result) {
+				return 0;
+			}
 	        var self = $(this);
 	        $.post(self.attr("action"), self.serialize(), success, "json");
 	        return false;
 	        function success(ajaxdata){
 	         	if(ajaxdata.status==1){
-	         		mui.alert(ajaxdata.info);
+	         		mui.alert(ajaxdata.info.tip);
+	         		$("#busuness").prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><label style="color:red;">营业额:'+ajaxdata.info.allmoney+'</label><span style="float:right">日期:'+ajaxdata.info.ym+'</span><p><label>订单:'+ajaxdata.info.num+'</label><label style="float:right">现金:'+ajaxdata.info.cash+'</label></p><p><label>支付宝:'+ajaxdata.info.alipay+'</label><label style="float:right">微信:'+ajaxdata.info.weixinpay+'</label></p><p><label>昨日零钱:'+ajaxdata.info.yesterday+'</label>　　<label style="float:right">余零:'+ajaxdata.info.info+'</label></p><p><label>今日应有:'+ajaxdata.info.todayYingyou+'</label><label style="float:right">今日实有:'+ajaxdata.info.todayShiyou+'</label></p><p><label>取走:'+ajaxdata.info.takeUp+'</label><button name="'+ajaxdata.info.id+'" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right busuness_del">删除</button></p></div></a></li>');
 		        }else{
 		          	mui.toast(ajaxdata.info);
 		        }
       		}
   		});
+
+  		//收入删除操作
+        $('#busuness').on('click','.busuness_del',function(){
+        	var result = confirm('你确定要删除吗？');
+			if(!result) {
+				return 0;
+			}
+            var id=$(this).attr("name");
+           	var _this=$(this);
+            $.ajax({
+            	url: "{:U('Admin/busuness_del')}",
+            	dataType: "json",
+            	async: true,
+            	data: {id:id},
+            	type: "POST",
+            	success: function(ajaxdata) {
+            		if(ajaxdata.status==1){
+            			mui.toast(ajaxdata.info);
+           				_this.parent().parent().parent().parent().remove();
+            		}else{
+            			mui.toast(ajaxdata.info);
+            		}
+            	},
+            	error: function() {
+            		alert('网络出错');
+            	}
+            });
+        });
 	});
 </script>
 </body>

@@ -4,14 +4,12 @@ use Think\Controller;
 class PublicController extends Controller {
 	protected function _initialize() {
 		header("Content-Type:text/html; charset=utf-8");
-		// if (!$this->is_mobile()) { 
-		// 	echo "请使用手机访问，谢谢";
-		// 	exit();
-		// }
+		if (!$this->is_mobile()) { 
+			echo "请使用手机访问，谢谢";
+			exit();
+		}
 		$s=session('username');
 		$c=cookie('username');
-		// echo "s".$s.'c'.$c;
-		// exit();
 		if($s==''&&$c!=''){
 			$pwd=cookie('psw');
 			$username=cookie('username');
