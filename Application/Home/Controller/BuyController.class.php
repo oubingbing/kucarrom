@@ -207,4 +207,161 @@ class BuyController extends PublicController {
         }
 	}
 
+	//清空已采购原料
+	public function clear(){
+		$name=session('username');
+		if ($name!="区志彬") {
+			$this->error('您不是古卡财务人员，无法进行此操作！！！');
+			exit();
+		}
+		$b=M('Batai')->select();
+		$c=M('Chufang')->select();
+		$ol=M('Online')->select();
+		$dataStatus['status']=0;
+		$bret=M('Batai')->where($dataStatus)->find();
+		$cret=M('Chufang')->where($dataStatus)->find();
+		$oret=M('Online')->where($dataStatus)->find();
+		$allmoney='';
+		$bm='';
+		$cm='';
+		$om='';
+		foreach ($b as $key => $val) {
+			if($val['status']==0){ 
+				$allmoney=$allmoney+$val['price'];
+				$bm=$bm+$val['price'];
+			}
+		}
+		foreach ($c as $key => $val) {
+			if($val['status']==0){ 
+				$allmoney=$allmoney+$val['price'];
+				$cm=$cm+$val['price'];
+			}
+		}
+		foreach ($ol as $key => $val) {
+			if($val['status']==0){ 
+				$allmoney=$allmoney+$val['price'];
+				$om=$om+$val['price'];
+			}
+		}
+		if($bret>0||$cret>0||$oret>0){
+			$order_data=array();
+			$order_data['username']='古卡';
+			$order_data['time']=time();
+			$order_data['price']=$allmoney;
+			$order_data['m']=date('y-m');
+			$oid=D('Srorder')->add($order_data);
+         	//制作日支出表
+			$costdata['chufang']=$cm;
+			$costdata['batai']=$bm;
+			$costdata['online']=$om;
+			$costdata['other']=0;
+			$costdata['time']=time();
+			$costdata['ym']=date('y-m-d');
+			$costdata['m']=date('y-m');
+			M('Cost')->add($costdata);
+		}else{
+			$this->error('没有可清除的原料单！！！');
+		}
+		if ($oid) {
+			foreach ($b as $key => $val) {
+				$order_b=array();
+				if($val['status']==0){ 
+					$order_b['oid']=$oid;
+					$order_b['name']=$val['name'];
+					$order_b['price']=$val['price'];
+					$order_b['num']=$val['num'];
+					$order_b['time']=$val['time'];
+					$order_b['buyman']=$val['buyman'];
+					$order_b['m']=date('y-m');
+					$is_ok=D('Orderlist')->add($order_b); 
+				}
+			}
+			foreach ($c as $key => $val) {
+				if($val['status']==0){
+					$order_c=array();
+					$order_c['oid']=$oid;
+					$order_c['name']=$val['name'];
+					$order_c['price']=$val['price'];
+					$order_c['num']=$val['num'];
+					$order_c['time']=$val['time'];
+					$order_c['buyman']=$val['buyman'];
+					$order_c['m']=date('y-m');
+					$is_ok=D('Orderlist')->add($order_c);  
+				}
+			}
+			foreach ($ol as $key => $val) {
+				if($val['status']==0){
+					$order_c=array();
+					$order_c['oid']=$oid;
+					$order_c['name']=$val['name'];
+					$order_c['price']=$val['price'];
+					$order_c['num']=$val['num'];
+					$order_c['time']=$val['time'];
+					$order_c['buyman']=$val['buyman'];
+					$order_c['m']=date('y-m');
+					$is_ok=D('Onlinelist')->add($order_c);  
+				}
+			}
+			$where['status']=0;
+			$data['status']=1;
+			$id['id']=1;
+			M('Caigou')->where($id)->save($data);
+			M('Batai')->where($where)->delete(); 
+			M('Chufang')->where($where)->delete();
+			M('Online')->where($where)->delete();
+			$this->success('清除成功！！！');
+		}
+	}
+
+	//获取原料详情
+	public function detail(){
+		$m=M('Myuser');
+		$where['username']=session('username');
+		$c=$m->where($where)->getField('buy');
+		if ($c==0) {
+			$this->error('您不是古卡采购人员，无法进入该页面！！！');
+			exit();
+		}
+		$id=I('id',0,'int');
+		$m=M('Orderlist');
+		$where['oid']=$id;
+		$online=M('Onlinelist');
+		$data=$m->where($where)->select();
+
+		$allmoney=0;
+		$allonline=0;
+		foreach ($data as $key => $val) {        
+			$allmoney+=$val['price'];
+		}
+		foreach ($onlinedata as $key => $val) {        
+			$allonline+=$val['price'];
+		}
+		$w=M();
+		$r=$w->query("select buyman,oid,sum(price) as 'kucapay'  from tp_orderlist where oid=".$id." group by buyman,oid ");
+		$this->assign('zhichu',$r);
+		$this->assign('data',$data);
+		$this->assign('money',$allmoney);
+		$this->assign('onlinemoney',$allonline);
+		$this->display();
+	}
+
+	//自动下采购单
+	public function auto(){
+      $myauto=M('Myauto');
+      $chufang=M('Chufang');
+      $re=$myauto->select();
+      foreach ($re as $key => $val) {   
+        $order_c=array();
+        $order_c['name']=$val['name'];
+        $order_c['price']=$val['price'];
+        $order_c['num']=$val['num'];
+        $order_c['status']=$val['status'];
+        $order_c['time']=time();
+        $order_c['username']=session('username');
+        $order_c['buyman']='null';
+        $is_ok=D('Chufang')->add($order_c);  
+      }
+      $this->redirect('Buy/index');
+	}
+
 }

@@ -73,7 +73,8 @@ class MainController extends PublicController {
 		            $data['week']=date('w');
 		            $data['point']=1;
 		            $c=M('Woker')->add($data);
-					$this->success('签到成功,'.'两小时,'.count_money(1).'元');
+		            $arr = array('tip' =>'签到成功,'.'两小时,'.count_money(1).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(1) );
+					$this->success($arr);
 				}
 				break;
 				case 2:
@@ -90,7 +91,8 @@ class MainController extends PublicController {
 		            $data['week']=date('w');
 		            $data['point']=2;
 		            $c=M('Woker')->add($data);
-					$this->success('签到成功,'.'两小时,'.count_money(2).'元');
+					$arr = array('tip' =>'签到成功,'.'两小时,'.count_money(2).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(2) );
+					$this->success($arr);
 				}
 				break;
 				case 3:
@@ -107,7 +109,8 @@ class MainController extends PublicController {
 		            $data['week']=date('w');
 		            $data['point']=3;
 		            $c=M('Woker')->add($data);
-					$this->success('签到成功,'.'两小时,'.count_money(3).'元');
+		            $arr = array('tip' =>'签到成功,'.'两小时,'.count_money(3).'元' ,'username'=>session('username'),'time'=>4,'salary'=>count_money(3) );
+					$this->success($arr);
 				}
 				break;
 				case 0:

@@ -31,7 +31,7 @@
 									<foreach name="live" item="live_list">
 									<p style="font-size:10px;color:rgba(96,56,17,1)">
 										<u>
-											{$live_list.name} {$live_list.week|weekNum=###} {$live_list.workpoint|timePoint=###} 已签
+											{$live_list.name} {$live_list.week|weekNum=###} {$live_list.workpoint|timePoint=###}
 										</u>
 									</p>
 									</foreach>
@@ -63,20 +63,20 @@
 							<!--签到记录-->
 							<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 qiandaodiv">
 								<a>
-									<span class="spancolor mui-icon iconfont">{$sumMoney}</span>
+									<span class="spancolor mui-icon iconfont" id="sumMoney">{$sumMoney}</span>
 									<div class="mui-media-body">当月兼职费</div>
 								</a>
 							</li>
 							<!--签到总情况-->
 							<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" style="border-left:solid 1px gray;">
 								<a>
-									<span class="spancolor mui-icon iconfont">{$allMoney}</span>
+									<span class="spancolor mui-icon iconfont" id="allMoney">{$allMoney}</span>
 									<div class="mui-media-body">总兼职费</div>
 								</a>
 							</li>
 						</ul>
 						<!--签到详情-->
-						<ul class="mui-table-view">
+						<ul class="mui-table-view" id="list">
 							<foreach name="qd_list" item="data">
 								<li class="mui-table-view-cell mui-media">
 									<a>
@@ -95,6 +95,7 @@
 		</div>
 	</div>
 </div>
+<script src="__PUBLIC__/js/count.js"></script>
 <script>
 	(function($) {
 		$('.mui-scroll-wrapper').scroll({
@@ -140,6 +141,10 @@
 						none_qiandao.css('color','#00CD00');
 						successTip.css('color','#00EE00');
 						successTip.text('签到成功');
+						mui.toast(ajaxdata.info.tip);
+						$('#list').prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><p >'+ajaxdata.info.username+'　时长:'+ajaxdata.info.time+'　工资:'+ajaxdata.info.salary+'　</p></div></a></li>');
+						$('#sumMoney').html(accAdd($('#sumMoney').html(),ajaxdata.info.salary));
+						$('#allMoney').html(accAdd($('#allMoney').html(),ajaxdata.info.salary));
 					}
 			    },
 			    error: function() {

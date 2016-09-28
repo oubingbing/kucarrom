@@ -5,6 +5,7 @@ $array=array(
 	'Money_weeken'=>'7',//周末兼职费
 	'Money'      => '6',//非周末兼职费
 	'Ohter_money'=>'1',//替班的额外奖励
+	'Clear_man'=>array(),//清空采购表人员
 );
 return array_merge($config,$array);
 ?>
