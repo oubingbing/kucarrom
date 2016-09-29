@@ -8,6 +8,24 @@ class BuyController extends PublicController {
 		$bdata=M('Batai')->where($data)->order('id DESC')->select();
 		$cdata=M('Chufang')->where($data)->order('id DESC')->select();
 		$odata=M('Online')->where($data)->order('id DESC')->select();
+		$allmoney=0;
+		$username=session('username');
+		//计算个人采购金额
+		foreach ($bdata as $key => $value) {
+			if($value['buyman']==$username){
+				$allmoney+=$value['price'];
+			}
+		}
+		foreach ($cdata as $key => $value) {
+			if($value['buyman']==$username){
+				$allmoney+=$value['price'];
+			}
+		}
+		foreach ($odata as $key => $value) {
+			if($value['buyman']==$username){
+				$allmoney+=$value['price'];
+			}
+		}
 		//原材料
 		$list=S('src_list');
 		if($list==''){
@@ -20,6 +38,7 @@ class BuyController extends PublicController {
 		$this->assign('batai',$bdata);
 		$this->assign('online',$odata);
 		$this->assign('chufang',$cdata);
+		$this->assign('allmoney',$allmoney);
 		$this->display();
 	}
 	//入料

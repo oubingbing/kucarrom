@@ -2,6 +2,14 @@
 namespace Home\Controller;
 use Think\Controller;
 class MainController extends PublicController {
+	protected function _initialize() {
+		$data['username']=session('username');
+		$power=M('Myuser')->where($data)->getField('power');
+		if($power<=0){
+			$this->redirect('Index/index');
+		}
+
+	}
 	public function index(){
 		$sumMoney=0;
 		$allMoney=0;

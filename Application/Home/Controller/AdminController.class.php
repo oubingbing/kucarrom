@@ -88,6 +88,10 @@ class AdminController extends PublicController {
 		$where['id']=$id;
 		$ret=M('qiandao')->where($where)->delete();
 		if($ret==1){
+			//更新数据缓存
+			$list=M("qiandao")->order('week ASC')->select();
+			//缓存数据
+			S('employeer',$list);
 			$this->success('删除成功');
 		}else{
 			$this->error('删除失败');
