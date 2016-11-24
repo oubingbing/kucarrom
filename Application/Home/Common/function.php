@@ -24,18 +24,34 @@
 	}
 
 	//判断当前时间是那个班次
-	function whatTime(){
+	function whatTime($point){
+		$t=strtotime(date('H:i'));
+		if($t>strtotime('11:00')&&$t<strtotime('13:00')&&$point==1){
+			return 1;
+		}else{
+			if($t>strtotime('16:30')&&$t<strtotime('18:29')&&$point==2){
+				return 2;
+			}else{
+				if($t>strtotime('18:30')&&$t<strtotime('22:30')&&$point==3){
+					return 3;
+				}else{
+					return 0;
+				}
+			}
+		}
+	}
+
+	//判断时间段
+	function point(){
 		$t=strtotime(date('H:i'));
 		if($t>strtotime('11:00')&&$t<strtotime('13:00')){
 			return 1;
 		}else{
-			if($t>strtotime('16:30')&$t<strtotime('18:30')){
+			if($t>strtotime('16:30')&&$t<strtotime('18:29')){
 				return 2;
 			}else{
-				if($t>strtotime('18:30')&$t<strtotime('22:30')){
+				if($t>strtotime('18:30')&&$t<strtotime('22:30')){
 					return 3;
-				}else{
-					return 0;
 				}
 			}
 		}
@@ -46,7 +62,7 @@
 		$data['username']=session('username');
 		$data['week']=$week;
 		$data['point']=$point;
-		$data['month']=date('y-m');
+		$data['ymd']=date('y-m-d');
 		$ret=M('woker')->where($data)->count();
 		if($ret>0){
 			return true;
@@ -56,12 +72,14 @@
 	}
 
 	//计算兼职费
-	function count_money($h){
+	function count_money($h,$m){
 		$w=date('w');
 		if($w==0||$w==6){
-			return C('Money_weeken')*whatHour($h);
+			return $m*whatHour($h);
+			// return C('Money_weeken')*whatHour($h);
 		}else{
-			return C('Money')*whatHour($h);
+			return $m*whatHour($h);
+			// return C('Money')*whatHour($h);
 		}
 	}
 

@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="baidu-site-verification" content="ZsfPXC6cIr" />
   <title>Kuca</title>
-  <link href="/kucaroomGit/kucarrom/Public/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/kucaroomGit/kucarrom/Public/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/kucaroomGit/kucarrom/Public/css/templatemo-style.css" rel="stylesheet">
-  <link rel="shortcut icon" href="/kucaroomGit/kucarrom/Public/img/favicon.ico" type="image/x-icon" />
+  <link href="/kucarrom/Public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/kucarrom/Public/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/kucarrom/Public/css/templatemo-style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/kucarrom/Public/img/favicon.ico" type="image/x-icon" />
 </head>
 <body>
   <!-- 引用头部文件 -->
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="tm-top-header-inner">
           <div class="tm-logo-container">
-            <img src="/kucaroomGit/kucarrom/Public/img/logo.png" alt="Logo" class="tm-site-logo">
+            <img src="/kucarrom/Public/img/logo.png" alt="Logo" class="tm-site-logo">
             <h1 class="tm-site-name tm-handwriting-font">Kuca Room</h1>
           </div>
           <div class="mobile-menu-icon">
@@ -32,13 +32,13 @@
           </div>
           <nav class="tm-nav">
             <ul>
-              <li><a href="/kucaroomGit/kucarrom/index.php/home/index/main" class="active">首页</a></li>
-              <?php if($status == 1 ): ?><li><a href="/kucaroomGit/kucarrom/index.php/home/personal/index" ><?php if($vip == 1 ): ?><img src="/kucaroomGit/kucarrom/Public/img/Vip.png" style="width:30px"><?php endif; echo ($login); ?></a></li>
+              <li><a href="<?php echo U('Index/index');?>" class="active">首页</a></li>
+              <?php if($_SESSION['username']== null): ?><li><a href="<?php echo U('Index/login');?>"><small style="font-size:9px">未登录,点击登录</small></a></li>
+                <li><a href="<?php echo U('Index/register');?>">注册</a></li>
                <?php else: ?>
-               <li><a href="<?php echo U('Index/login');?>"><small style="font-size:9px">未登录,点击登录</small></a></li><?php endif; ?>
-             <li><a href="/kucaroomGit/kucarrom/index.php/home/Login/register">注册</a></li>
-             <li><?php if($power >= 1 ): ?><a href="/kucaroomGit/kucarrom/index.php/admine" >后台</a><?php endif; ?></li>
-             <?php if($status == 1 ): ?><li><a href="/kucaroomGit/kucarrom/index.php/home/Login/quit" >退出</a></li><?php endif; ?>
+               <li><a href="<?php echo U('Main/index');?>"><?php echo (session('username')); ?></a></li><?php endif; ?>
+              <?php if($_SESSION['username']!= null): ?><li><a href="<?php echo U('Index/quit');?>">退出</a></li>
+               <?php else: endif; ?>
            </ul>
          </nav>   
        </div>           
@@ -50,18 +50,18 @@
  <section class="tm-welcome-section">
   <div class="container tm-position-relative">
     <div class="tm-lights-container">
-      <img src="/kucaroomGit/kucarrom/Public/img/light.png" alt="Light" class="light light-1">
-      <img src="/kucaroomGit/kucarrom/Public/img/light.png" alt="Light" class="light light-2">
-      <img src="/kucaroomGit/kucarrom/Public/img/light.png" alt="Light" class="light light-3">  
+      <img src="/kucarrom/Public/img/light.png" alt="Light" class="light light-1">
+      <img src="/kucarrom/Public/img/light.png" alt="Light" class="light light-2">
+      <img src="/kucarrom/Public/img/light.png" alt="Light" class="light light-3">  
     </div>        
     <div class="row tm-welcome-content">
-      <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="/kucaroomGit/kucarrom/Public/img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="/kucaroomGit/kucarrom/Public/img/header-line.png" alt="Line" class="tm-header-line"></h2>
+      <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="/kucarrom/Public/img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="/kucarrom/Public/img/header-line.png" alt="Line" class="tm-header-line"></h2>
     </p>
-    <a href="/kucaroomGit/kucarrom/index.php/home/Visitor/index" class="tm-more-button tm-more-button-welcome" style="">Kuca Room</a> 
+    <a href="/kucarrom/index.php/home/Visitor/index" class="tm-more-button tm-more-button-welcome" style="">Kuca Room</a> 
 
     <p class="gray-text tm-welcome-description">古卡咖啡餐厅是一个由在校大学生创办的，成立于2015年4月。 <span class="gold-text">特点有三个：店面小而美、投资成本低和产品附加值高。</span>但是，古卡不仅仅只是一家咖啡餐厅，古卡来源于大学生，所以决定回到大学生中，所以古卡希望打造一个大学生可以真正体验创业的平台，其核心理念是“together”.    
     </div>
-    <img src="/kucaroomGit/kucarrom/Public/img/table-set.png" alt="Table Set" class="tm-table-set img-responsive"> 
+    <img src="/kucarrom/Public/img/table-set.png" alt="Table Set" class="tm-table-set img-responsive"> 
   </div>      
 </section>
 <div class="tm-main-section light-gray-bg">
@@ -74,21 +74,21 @@
       </div>
       <div class="col-lg-3 col-md-3 col-sm-4 tm-welcome-img-container">
         <div class="inline-block shadow-img">
-          <img src="/kucaroomGit/kucarrom/Public/img/kabu.jpg" alt="Image" class="img-circle img-thumbnail">  
+          <img src="/kucarrom/Public/img/kabu.jpg" alt="Image" class="img-circle img-thumbnail">  
         </div>              
       </div>            
     </section> 
     <section class="tm-section">
       <div class="row">
         <div class="col-lg-12 tm-section-header-container">
-          <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="/kucaroomGit/kucarrom/Public/img/logo.png" alt="Logo" class="tm-site-logo">kuca blackboard</h2> 
+          <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="/kucarrom/Public/img/logo.png" alt="Logo" class="tm-site-logo">kuca blackboard</h2> 
           <div class="tm-hr-container"><hr class="tm-hr"></div> 
         </div>  
       </div>          
       <div class="row">
         <div class="tm-daily-menu-container margin-top-60">
           <div class="col-lg-4 col-md-4">
-            <img src="/kucaroomGit/kucarrom/Public/img/menu-board.png" alt="Menu board" class="tm-daily-menu-img">      
+            <img src="/kucarrom/Public/img/menu-board.png" alt="Menu board" class="tm-daily-menu-img">      
           </div>            
           <div class="col-lg-8 col-md-8">
             <p style="color:green">古卡小黑板，这里有古卡最新的动态信息，我们会把古卡最新的信息，包括最新优惠活动、招聘信息和其他与古卡相关的资讯都会公布于此。</p>
@@ -110,9 +110,9 @@
         <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
           <h3 class="tm-footer-div-title">古卡</h3>
           <ul>
-            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/aboutus">关于我们</a></li>
-            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/culture">古卡文化</a></li>
-            <li><a href="/kucaroomGit/kucarrom/index.php/home/index/team">古卡团队</a></li>
+            <li><a href="/kucarrom/index.php/home/index/aboutus">关于我们</a></li>
+            <li><a href="/kucarrom/index.php/home/index/culture">古卡文化</a></li>
+            <li><a href="/kucarrom/index.php/home/index/team">古卡团队</a></li>
           </ul>
         </nav>
 
@@ -122,7 +122,7 @@
             <p>微博：古卡老屋</p>
             <p>QQ：928861455</p>
             <p>电话：15767089608</p>
-            <p>微信公众号：古卡老屋(gukalaowu)<br><br><img src="/kucaroomGit/kucarrom/Public/img/erweima.jpg" style="width:200px"></p>
+            <p>微信公众号：古卡老屋(gukalaowu)<br><br><img src="/kucarrom/Public/img/erweima.jpg" style="width:200px"></p>
           </div>
         </div>
       </div>          
@@ -137,7 +137,7 @@
    </div>
  </div>
 </footer> 
-<script type="text/javascript" src="/kucaroomGit/kucarrom/Public/js/jquery-1.11.2.min.js"></script>    
-<script type="text/javascript" src="/kucaroomGit/kucarrom/Public/js/templatemo-script.js"></script>      
+<script type="text/javascript" src="/kucarrom/Public/js/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript" src="/kucarrom/Public/js/templatemo-script.js"></script>      
 </body>
 </html>

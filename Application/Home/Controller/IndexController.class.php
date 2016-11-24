@@ -11,11 +11,10 @@ class IndexController extends PublicController {
 				exit();
 			}
 			$login = array( 
-				//验证登录信息  
 				array('username','require','账号不能为空'),
-				array('username','checkLoginName','账号或密码错误',1,'callback'), 
+				array('username','checkLoginName','账号不存在',1,'callback'), 
 				array('password','require','密码不能为空'),
-				array('password','checkLoginPassword','账号或密码错误',1,'callback'),
+				array('password','checkLoginPassword','密码错误',1,'callback'),
 				array('code','require','验证码不能为空',1),
 				array('code','checkCode','验证码错误',1,'callback'), 
 			);
@@ -56,6 +55,7 @@ class IndexController extends PublicController {
 			$regtime = time();//获得注册时间
 			$m->regtime=$regtime;
 			$m->power=null;
+			$m->password=md5(I('post.password'));
 			$m->add();
 			$this->success('注册成功');
 			}

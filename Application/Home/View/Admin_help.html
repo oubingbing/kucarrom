@@ -120,6 +120,7 @@
 	<header class="mui-bar mui-bar-nav header">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:white"></a>
 		<h1 id="title" class="mui-title"><a href="{:U('Index/index')}">帮助签到</a></h1>
+		<a href="{:U('Admin/signin')}" class="mui-pull-right" style="color:white;margin-top:13px">签到详情</a>
 	</header>
 	<div class="mui-content">
 		<div class="mui-scroll">
@@ -128,7 +129,7 @@
 					<div class="mui-input-row">
 						<label>兼　职</label>
 						<select name="username" style="text-align:center;float: left;width:100px">
-							<foreach name='list' item='data'>               
+							<foreach name='list' item='data'>
 								<option value="{$data.username}">{$data.username}</option>
 							</foreach>
 						</select>
@@ -155,7 +156,7 @@
 					</div>
 					<div class="mui-input-row">
 						<label>费　用</label>
-						<input name="money" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入兼职的费用">
+						<input name="money" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入兼职的费用" id="emplyeerMoney">
 					</div>
 					<div class="mui-input-row">
 						<label>时　长</label>
@@ -199,6 +200,14 @@
 		$('.mui-slider-group').height($(document).height()-80);
 		//添加兼职操作
 		$("#post_form").submit(function(e){
+			var result = confirm('你确定要提交吗？');
+			if(!result) {
+				return false;
+			}
+			if($('#emplyeerMoney').val()==''){
+				alert('费用不能为空');
+				return false;
+			}
 			var self = $(this);
 			$.post(self.attr("action"), self.serialize(), success, "json");
 			return false;

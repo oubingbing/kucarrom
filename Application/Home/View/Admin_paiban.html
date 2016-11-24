@@ -147,6 +147,10 @@
 										</select>
 									</div>
 									<div class="mui-input-row">
+										<label>money</label>
+										<input name="money" type="text" class="mui-input-clear mui-input inputFont" placeholder="每小时工资">
+									</div>
+									<div class="mui-input-row">
 										<label>时间段</label>
 										<select name="workpoint" style="text-align:center;float: left;width:100px"> 
 											<option value="1">中班</option>
@@ -186,7 +190,7 @@
 											<div class="mui-media-body">
 												{$data.name}
 												<p class='mui-ellipsis'>
-													<span>{$data.workpoint|timePoint=###}　{$data.week|weekNum=###}</span>
+													<span>{$data.workpoint|timePoint=###}　{$data.week|weekNum=###}　工资:{$data.money}(小时/元)</span>
 													<span style="float:right"><button name="{$data.id}" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right del">移除</button></span>
 												</p>
 											</div>

@@ -18,9 +18,6 @@
 		padding-top: 10px;
 		
 	}
-	#slider{
-
-	}
 </style>
 
 <div class="mui-content">
@@ -49,6 +46,11 @@
 				<a href="{:U('Buy/auto')}" style="color: rgba(96,56,17,1);">自动下单</a>
 			</li>
 		</ul>
+		<ul class="mui-table-view whichShow">
+			<li class="mui-table-view-cell">
+				<a href="{:U('Buy/search')}" style="color: rgba(96,56,17,1);">搜索</a>
+			</li>
+		</ul>
 	</div>
 	<div id="slider" class="mui-slider">
 		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -66,7 +68,7 @@
 		<div class="mui-slider-group">
 			<!--入料-->
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-				<div id="scroll1" class="mui-scroll-wrapper">
+				<div id="scroll1" class="mui-scroll-wrapper" style="height:350px">
 					<div class="mui-scroll">
 						<div class="mui-card">
 							<form class="mui-input-group" action="{:U('Buy/add_src')}" method="post" id="post_form">
@@ -84,15 +86,15 @@
 								</div>
 								<div class="mui-input-row">
 									<label>原料</label>
-									<input name="name" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入名称">
+									<input id="src-name" name="name" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入名称">
 								</div>
 								<div class="mui-input-row">
 									<label>价格</label>
-									<input name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
+									<input id="src-price" name="price" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入价格">
 								</div>
 								<div class="mui-input-row">
 									<label>数量</label>
-									<input name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
+									<input id="src-num" name="num" type="text" class="mui-input-clear mui-input inputFont" placeholder="请输入数量">
 								</div>
 								<div class="mui-content-padded">
 									<button type="submit" class="mui-btn mui-btn-block mui-btn-warning" style="margin-top:20px">提交</button>
@@ -219,6 +221,9 @@
 	        function success(ajaxdata){
 	        	if(ajaxdata.status==1){
 	        		mui.alert(ajaxdata.info.tip);
+	        		$('#src-name').val('');
+	        		$('#src-price').val('');
+	        		$('#src-num').val('');
 	        		switch (ajaxdata.info.where) {
 	        			case '1':
 	        			$("#cf").prepend('<li class="mui-table-view-cell mui-media"><a><div class="mui-media-body"><label style="color:red;">'+ajaxdata.info.name+'</label>　<span style="float:right">下单日期:刚刚</span><p>数量：<input class="inputChange cf_num_chg" id="'+ajaxdata.info.id+'" type="text" name="num" value="'+ajaxdata.info.num+'" style="width:80px;height:30px;text-align:center">　　<span style="float:right">总金额：<input class="inputChange cf_price_chg" type="text" name="'+ajaxdata.info.id+'" value="'+ajaxdata.info.price+'" style="width:80px;height:30px;text-align:center;"></span><br><label>下单：</label>'+ajaxdata.info.username+'　<button name="'+ajaxdata.info.id+'" style="float:right" type="button" class="mui-btn mui-btn-danger mui-pull-right cf_do_del">删除</button><button type="button" class="mui-btn mui-btn-warning cf_do_buy" style="float:right;margin-right:20px" id="'+ajaxdata.info.id+'" name="'+ajaxdata.info.price+'">采购</button></p></div></a></li>');

@@ -140,7 +140,7 @@ class AdminController extends PublicController {
 
 		}else{
 			$data['username']=I('post.username');
-			$data['startime']=time();
+			$data['startime']=strtotime(I('post.timeUnix'));
 			$data['boss']=session('username');
 			$data['time']=I('post.time');
 			$data['salary']=I('post.money');
@@ -189,5 +189,90 @@ class AdminController extends PublicController {
 		}else{
 			$this->error('删除失败');
 		}
+	}
+
+	//采购详情
+	public function signin(){
+		$data['ymd']=date('y-m-d');
+		$ret=M('woker')->where($data)->order('id DESC')->select();
+		$Mdata['month']=date('y-m');
+		$monthData=M('woker')->where($Mdata)->order('id DESC')->select();
+		$where['power']=1;
+		$list= M('Myuser')->where($where)->select();
+		$monthMoney=0;
+		$allmoney=0;
+		$m=date('y-m');
+		foreach ($monthData as $key => $value) {
+			if($value['month']==date('y-m') && $value['is_check']==1){
+				//计算当月的兼职费
+				$monthMoney+=$value['salary'];
+			}
+			//总兼职费
+			if($value['is_check']==1){
+					//计算当月的兼职费
+				$allmoney+=$value['salary'];
+			}
+		}
+		$this->assign('list',$list);
+		$this->assign('monthMoney',$monthMoney);
+		$this->assign('allmoney',$allmoney);
+		$this->assign('data',$ret);
+		$this->assign('data2',$monthData);
+		$this->display();
+	}
+
+	//审核
+	public function check(){
+		$id=I('id');
+		$data['id']=$id;
+		$changeData['is_check']=1;
+		$ret=M('woker')->where($data)->setField($changeData);
+		if($ret!=0){
+		 $this->success('审核成功');
+		}else{
+			$this->error('审核失败');
+		}
+	}
+
+	//删除
+	public function del(){
+		$id=I('id');
+		$data['id']=$id;
+		$ret=M('woker')->where($data)->delete();
+		if($ret!=0){
+		 $this->success('删除成功');
+		}else{
+			$this->error('删除失败');
+		}
+	}
+
+	//兼职费用详情
+	public function detail(){
+		$id=I('id',0,'int');
+		$username=I('username',1);
+		$d['username']=$username;
+		$ret=M('woker')->where($d)->order('id DESC')->select();
+		$Mdata['month']=date('y-m');
+		$Mdata['username']=$username;
+		$monthData=M('woker')->where($Mdata)->order('id DESC')->select();
+		$monthMoney=0;
+		$allmoney=0;
+		foreach ($ret as $key => $value) {
+			if($value['month']==date('y-m') && $value['is_check']==1){
+				//计算当月的兼职费
+				$monthMoney+=$value['salary'];
+			}
+			//总兼职费
+			if($value['is_check']==1){
+					//计算当月的兼职费
+				$allmoney+=$value['salary'];
+			}
+		}
+		$this->assign('monthData',$monthData);
+		$this->assign('ret',$ret);
+		$this->assign('monthMoney',$monthMoney);
+		$this->assign('allmoney',$allmoney);
+		$this->assign('username',$username);
+		$this->display();
 	}
 }

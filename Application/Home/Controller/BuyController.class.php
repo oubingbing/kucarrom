@@ -32,7 +32,7 @@ class BuyController extends PublicController {
 			$list=M('Myauto')->select();
 		}
 		//采购明细
-		$buyList=M('Srorder')->limit(15)->order('id DESC')->select();
+		$buyList=M('Srorder')->order('id DESC')->select();
 		$this->assign('buyList',$buyList);
 		$this->assign('srcList',$list);
 		$this->assign('batai',$bdata);
@@ -229,8 +229,10 @@ class BuyController extends PublicController {
 	//清空已采购原料
 	public function clear(){
 		$name=session('username');
-		if ($name!="区志彬") {
-			$this->error('您不是古卡财务人员，无法进行此操作！！！');
+		$buyWhich['username']=$name;
+		$power=M('Myuser')->where($buyWhich)->getField('buypower');
+		if ($power!=1) {
+			$this->error('您不是古卡后勤保障人员，无法进行此操作！！！');
 			exit();
 		}
 		$b=M('Batai')->select();
@@ -381,6 +383,21 @@ class BuyController extends PublicController {
         $is_ok=D('Chufang')->add($order_c);  
       }
       $this->redirect('Buy/index');
+	}
+
+	//搜索
+	public function search(){
+		if(!IS_POST){
+		$this->display();
+		}else{
+			$data['name']=array("LIKE",'%'.I('post.name').'%');
+			$ret=M('Orderlist')->where($data)->order('id DESC')->select();
+			$num=count($ret);
+			$this->assign('name',I('post.name'));
+			$this->assign('num',$num);
+			$this->assign('result',$ret);
+			$this->display();
+		}
 	}
 
 }

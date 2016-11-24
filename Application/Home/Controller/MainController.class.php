@@ -60,12 +60,13 @@ class MainController extends PublicController {
 		$w=date('w');
 		$data['name']=session('username');
 		$data['week']=$w;
+		$data['workpoint']=point();
 		$ret=M('qiandao')->where($data)->find();
 		if($ret==null){
 			$this->error('今天没有你的排班');
 		}else{
 			//判断是否可以签到了
-			switch (whatTime()) {
+			switch (whatTime($ret['workpoint'])) {
 				case 1:
 				//中班
 				//判断是否有这个时间段的签到了
@@ -75,13 +76,13 @@ class MainController extends PublicController {
 					$data['username']=session('username');
 		            $data['startime']=time();
 		            $data['time']=2;
-		            $data['salary']=count_money(1);
+		            $data['salary']=count_money(1,$ret['money']);
 		            $data['ymd']=date("y-m-d ", time());
 		            $data['month']=date("y-m", time());
 		            $data['week']=date('w');
 		            $data['point']=1;
 		            $c=M('Woker')->add($data);
-		            $arr = array('tip' =>'签到成功,'.'两小时,'.count_money(1).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(1) );
+		            $arr = array('tip' =>'签到成功,'.'两小时,'.count_money(1,$ret['money']).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(1,$ret['money']) );
 					$this->success($arr);
 				}
 				break;
@@ -93,13 +94,13 @@ class MainController extends PublicController {
 					$data['username']=session('username');
 		            $data['startime']=time();
 		            $data['time']=2;
-		            $data['salary']=count_money(2);
+		            $data['salary']=count_money(2,$ret['money']);
 		            $data['ymd']=date("y-m-d ", time());
 		           	$data['month']=date("y-m", time());
 		            $data['week']=date('w');
 		            $data['point']=2;
 		            $c=M('Woker')->add($data);
-					$arr = array('tip' =>'签到成功,'.'两小时,'.count_money(2).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(2) );
+					$arr = array('tip' =>'签到成功,'.'两小时,'.count_money(2,$ret['money']).'元' ,'username'=>session('username'),'time'=>2,'salary'=>count_money(2,$ret['money']) );
 					$this->success($arr);
 				}
 				break;
@@ -111,13 +112,13 @@ class MainController extends PublicController {
 					$data['username']=session('username');
 		            $data['startime']=time();
 		            $data['time']=4;
-		            $data['salary']=count_money(3);
+		            $data['salary']=count_money(3,$ret['money']);
 		            $data['ymd']=date("y-m-d", time());
 		           	$data['month']=date("y-m", time());
 		            $data['week']=date('w');
 		            $data['point']=3;
 		            $c=M('Woker')->add($data);
-		            $arr = array('tip' =>'签到成功,'.'两小时,'.count_money(3).'元' ,'username'=>session('username'),'time'=>4,'salary'=>count_money(3) );
+		            $arr = array('tip' =>'签到成功,'.'四小时,'.count_money(3,$ret['money']).'元' ,'username'=>session('username'),'time'=>4,'salary'=>count_money(3,$ret['money']) );
 					$this->success($arr);
 				}
 				break;
